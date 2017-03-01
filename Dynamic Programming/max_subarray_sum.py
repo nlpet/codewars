@@ -20,10 +20,8 @@ def max_sequence(arr):
     elif min(arr) >= 0:
         return sum(arr)
     else:
-        l = len(arr)
-        max_sum = 0
-        curr_max_sum = arr[0]
-        for i in range(1, l):
+        max_sum, curr_max_sum = 0, arr[0]
+        for i in range(1, len(arr)):
             curr_max_sum = max(arr[i], curr_max_sum + arr[i])
             if curr_max_sum > max_sum:
                 max_sum = curr_max_sum
