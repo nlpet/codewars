@@ -1,4 +1,4 @@
-'''
+u"""
 Decode morse code.
 
 In this kata you have to write a simple Morse code decoder. While the Morse code
@@ -24,8 +24,8 @@ morse code as input and return a decoded human-readable string.
 For example:
 
 decodeMorse('.... . -.--   .--- ..- -.. .')
-#should return 'HEY JUDE'
-'''
+should return 'HEY JUDE'
+"""
 import re
 import sys
 

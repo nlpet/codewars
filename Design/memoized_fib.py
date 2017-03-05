@@ -1,8 +1,6 @@
 """
 The Fibonacci sequence is traditionally used to explain tree recursion.
 
-URL: https://www.codewars.com/kata/memoized-fibonacci
-
 def fibonacci(n):
     if n in [0, 1]:
         return n
@@ -90,8 +88,6 @@ def run_tests():
         test.assert_equals((fib_formula(150)), 9969216677189303386214405760200)
         f300 = 222232244629420445529739893461909967206666939096499764990979600
         test.assert_equals(fib_formula(300), f300)
-
-
 
 
 if __name__ == '__main__':

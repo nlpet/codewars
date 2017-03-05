@@ -1,4 +1,4 @@
-"""
+u"""
 Doors in the school challenge.
 
 In the morning all the doors in the school are closed. The school is quite big:

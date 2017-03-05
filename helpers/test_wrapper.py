@@ -65,7 +65,7 @@ class Test(object):
         try:
             op()
             self._handle_failure(msg)
-        except:
+        except Exception:
             self._handle_success(msg)
 
     def report(self):
