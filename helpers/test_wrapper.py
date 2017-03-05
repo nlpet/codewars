@@ -1,10 +1,12 @@
 # Custom implementation of codewar's testing framework
+# from collections import Iterable
 from termcolor import colored
-from collections import Iterable
 from time import time
 
 
 class Test(object):
+    """Test class for codewars."""
+
     def __init__(self):
         self.failures = 0
         self.successes = 0
@@ -32,7 +34,7 @@ class Test(object):
 
     def _format_msg(self, a, b, msg):
         if not msg:
-            a, b = map(lambda x: list(x) if isinstance(x, Iterable) else x, [a, b])
+            # a, b = map(lambda x: list(x) if isinstance(x, Iterable) else x, [a, b])
             msg = 'expect {} to equal {}'.format(a, b)
         return msg
 

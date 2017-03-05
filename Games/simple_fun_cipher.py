@@ -27,7 +27,7 @@ charCode('y') = 121.
 import sys
 sys.path.append('..')
 
-from codewars.helpers.test_wrapper import Test
+from helpers.test_wrapper import Test
 
 
 def decipher(cipher):
