@@ -24,11 +24,11 @@ from helpers.test_wrapper import Test
 
 
 def doors(n):
-    doors = [False] * n
-    for i in range(0, n):
+    doors = [1] * n
+    for i in range(1, n):
         for j in range(i, n, i + 1):
             doors[j] = not doors[j]
-    return doors.count(True)
+    return sum(doors)
 
 
 def doors2(n):
