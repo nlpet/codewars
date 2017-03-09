@@ -6,7 +6,7 @@ URL: https://www.codewars.com/kata/whats-a-perfect-power-anyway
 import sys
 sys.path.append('..')
 
-from codewars.helpers.test_wrapper import Test
+from helpers.test_wrapper import Test
 from random import random, randrange
 from math import log, floor, sqrt
 

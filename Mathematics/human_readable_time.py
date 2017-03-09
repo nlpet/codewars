@@ -10,6 +10,7 @@ The maximum time never exceeds 359999 (99:59:59)
 You can find some examples in the test fixtures.
 """
 
+
 def make_readable(seconds):
     mm, ss = divmod(seconds, 60)
     if mm >= 60:

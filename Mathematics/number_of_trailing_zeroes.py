@@ -19,7 +19,6 @@ def zeros(n):
     return zeroes
 
 
-
 if __name__ == '__main__':
     assert(zeros(12) == 2)
     assert(zeros(13) == 2)
