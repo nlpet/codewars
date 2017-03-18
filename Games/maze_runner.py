@@ -39,7 +39,6 @@ N = North, E = East, W = West and S = South.
 
 direction = ['N','N','N','N','N','E','E','E','E','E'] == 'Finish'
 
-WIP
 """
 import sys
 sys.path.append('..')
@@ -70,7 +69,7 @@ def maze_runner(maze, directions):
         else:
             raise Exception('Invalid direction')
 
-        if (si == -1 or si == h - 1) or (sj == -1 or sj == w) or maze[si][sj] == 1:
+        if (si == -1 or si == h) or (sj == -1 or sj == w) or maze[si][sj] == 1:
             return 'Dead'
 
         if maze[si][sj] == 3:
@@ -79,9 +78,27 @@ def maze_runner(maze, directions):
     return 'Lost'
 
 
+# _SAFE, _WALL, _START, _FINISH = (0, 1, 2, 3)
+# _MOVE = {'N': 0 - 1j, 'W': -1 + 0j, 'E': 1 + 0j, 'S': 0 + 1j}
+#
+#
+# def maze_runner(maze, directions):
+#     tiles = {x + y * 1j: tile for y,
+#              row in enumerate(maze) for x, tile in enumerate(row)}
+#     pos = next(pos for pos, tile in tiles.items() if tile == _START)
+#     for move in directions:
+#         pos += _MOVE[move]
+#         tile = tiles.get(pos, _WALL)
+#         if tile in (_SAFE, _START):
+#             continue
+#         return 'Finish' if tile == _FINISH else 'Dead'
+#     return 'Lost'
+
+
 def run_tests():
 
     with Test() as test:
+        test.describe('Custom tests')
         maze = [
             [1, 1, 1, 1, 1, 1, 1],
             [1, 0, 0, 0, 0, 0, 3],
@@ -91,18 +108,39 @@ def run_tests():
             [1, 0, 0, 0, 0, 0, 1],
             [1, 2, 1, 0, 1, 0, 1]]
 
-        directions = ['N', 'N', 'N', 'N', 'N', 'E', 'E', 'E', 'E', 'E']
-        test.assert_equals(maze_runner(maze, directions), 'Finish')
+        ds = ['N', 'N', 'N', 'N', 'N', 'E', 'E', 'E', 'E', 'E']
+        test.assert_equals(maze_runner(maze, ds), 'Finish')
 
-        directions = ['N', 'E', 'S', 'S']
-        test.assert_equals(maze_runner(maze, directions), 'Dead')
+        ds = ['N', 'E', 'S', 'S']
+        test.assert_equals(maze_runner(maze, ds), 'Dead')
 
-        directions = ['N', 'E', 'W', 'N']
-        test.assert_equals(maze_runner(maze, directions), 'Lost')
+        ds = ['N', 'E', 'W', 'N']
+        test.assert_equals(maze_runner(maze, ds), 'Lost')
 
-        directions = ['N', 'S', 'X', 'N']
+        ds = ['N', 'S', 'X', 'N']
         msg = 'Should raise error due to invalid direction'
-        test.expect_error(msg, maze_runner(maze, directions))
+        test.expect_error(msg, maze_runner, (maze, ds))
+
+        test.describe('Example tests')
+
+        test.it('Should return Finish')
+        ds = ['N', 'N', 'N', 'N', 'N', 'E', 'E', 'E', 'E', 'E']
+        test.assert_equals(maze_runner(maze, ds), 'Finish')
+        ds = ['N', 'N', 'N', 'N', 'N', 'E', 'E',
+              'S', 'S', 'E', 'E', 'N', 'N', 'E']
+        test.assert_equals(maze_runner(maze, ds), 'Finish')
+        ds = ['N', 'N', 'N', 'N', 'N', 'E', 'E', 'E', 'E', 'E', 'W', 'W']
+        test.assert_equals(maze_runner(maze, ds), 'Finish')
+
+        test.it('Should return Dead')
+        test.assert_equals(maze_runner(
+            maze, ['N', 'N', 'N', 'W', 'W']), 'Dead')
+        ds = ['N', 'N', 'N', 'N', 'N', 'E', 'E', 'S', 'S', 'S', 'S', 'S', 'S']
+        test.assert_equals(maze_runner(maze, ds), 'Dead')
+
+        test.it('Should return Lost')
+        test.assert_equals(maze_runner(
+            maze, ['N', 'E', 'E', 'E', 'E']), 'Lost')
 
 
 if __name__ == '__main__':

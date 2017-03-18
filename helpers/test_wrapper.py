@@ -61,9 +61,12 @@ class Test(object):
         else:
             self._handle_failure(msg)
 
-    def expect_error(self, msg, op):
+    def expect_error(self, msg, op, args=None):
         try:
-            op()
+            if args:
+                op(*args)
+            else:
+                op()
             self._handle_failure(msg)
         except Exception:
             self._handle_success(msg)

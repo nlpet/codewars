@@ -30,6 +30,6 @@ def PokerHandsRanker(object):
         cards_most_common = cards_counter.most_common(1)[0][1]
 
         if suits_most_common == 1:
-            pass # no flush
+            pass  # no flush
         elif cards_most_common == 5:
-            pass # flush
+            pass  # flush
