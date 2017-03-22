@@ -1,4 +1,6 @@
 """
+Human Readable Time
+
 Write a function, which takes a non-negative integer (seconds) as input and
 returns the time in a human-readable format (HH:MM:SS)
 
@@ -18,7 +20,6 @@ def make_readable(seconds):
     else:
         hh = 0
     return "{:02}:{:02}:{:02}".format(hh, mm, ss)
-
 
 
 if __name__ == '__main__':

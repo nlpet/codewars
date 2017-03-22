@@ -1,4 +1,4 @@
-"""
+u"""
 Simple Fun #9: Array Packing
 
 Task
