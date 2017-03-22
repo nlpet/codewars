@@ -30,7 +30,7 @@ class Test(object):
 
     def _handle_failure(self, msg):
         self.failures += 1
-        print(colored('[✘] {}'.format(msg), 'red'))
+        print(colored('[✖] {}'.format(msg), 'red'))  # ✘
 
     def _format_msg(self, a, b, msg):
         if not msg:
