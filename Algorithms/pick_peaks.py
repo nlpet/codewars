@@ -72,6 +72,5 @@ def run_tests():
         test.assert_equals(pick_peaks([0, 11, -2, -1, 19, 20]), {"pos": [1], "peaks": [11]})
 
 
-
 if __name__ == '__main__':
     run_tests()
