@@ -17,7 +17,8 @@ def balance_statement(strng):
         match = re.match(r'^([A-z0-9\.]+)\s(\d+)\s(\d*\.\d+)\s(B|S)$', order)
         if match:
             if prices.get(match.group(4)) is not None:
-                prices[match.group(4)] += int(match.group(2)) * float(match.group(3))
+                prices[match.group(4)] += int(match.group(2)
+                                              ) * float(match.group(3))
             else:
                 badly_formed.append(order + ' ;')
         elif order:
