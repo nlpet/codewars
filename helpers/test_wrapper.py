@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Custom implementation of codewar's testing framework
 # from collections import Iterable
 from termcolor import colored
