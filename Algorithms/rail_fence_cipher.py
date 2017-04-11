@@ -70,9 +70,8 @@ def decode(string, rails):
     i = 0
 
     while not all(read):
-        if i == length
-
-
+        if i == length:
+            pass  # TODO(complete this)
 
 
 def run_tests():
