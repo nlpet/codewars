@@ -48,27 +48,31 @@ def encode(string, rails):
 
 
 def decode(string, rails):
-    result = []
     length = len(string)
     per_line = length // rails
     first_line = per_line - 1
     last_line = per_line - 2
-    middle_lines = rails - 2
+
+    indices = [(0, None)] * rails
+    indices[0] = (0, first_line)
+    indices[-1] = (length - last_line, length)
+
+    middles_lines = rails - 2
     middle_line_len = int((length - first_line - last_line) / (rails - 2))
 
-    import ipdb; ipdb.set_trace()
+    start = first_line
+    for line_num in range(1, middles_lines + 1):
+        indices[line_num] = (start, start + middle_line_len)
+        start += middle_line_len
 
-    result.extend(string[:first_line])
+    result = []
+    read = [False] * rails
+    i = 0
 
-    pos = first_line
+    while not all(read):
+        if i == length
 
-    for line in range(middle_lines):
-        result.extend(string[pos: pos + middle_line_len])
-        pos += middle_line_len
 
-    result.extend(string[-last_line:])
-
-    return ''.join(result)
 
 
 def run_tests():
