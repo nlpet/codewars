@@ -44,7 +44,26 @@ from helpers.test_wrapper import Test
 
 
 def encode(string, rails):
-    pass
+    encoded_rails = [[] for _ in range(rails)]
+    i = 0
+    reverse = False
+
+    for ch in string:
+        if i == rails:
+            reverse = True
+            i -= 2
+        elif i == -1:
+            reverse = False
+            i += 2
+
+        encoded_rails[i].append(ch)
+
+        if reverse:
+            i -= 1
+        else:
+            i += 1
+
+    return ''.join([ch for rail in encoded_rails for ch in rail])
 
 
 def decode(string, rails):
@@ -53,25 +72,43 @@ def decode(string, rails):
     first_line = per_line - 1
     last_line = per_line - 2
 
-    indices = [(0, None)] * rails
-    indices[0] = (0, first_line)
-    indices[-1] = (length - last_line, length)
+    indices = [[0, None]] * rails
+    indices[0] = [0, first_line]
+    indices[-1] = [length - last_line, length]
 
     middles_lines = rails - 2
     middle_line_len = int((length - first_line - last_line) / (rails - 2))
 
     start = first_line
     for line_num in range(1, middles_lines + 1):
-        indices[line_num] = (start, start + middle_line_len)
+        indices[line_num] = [start, start + middle_line_len]
         start += middle_line_len
 
     result = []
     read = [False] * rails
+    reverse = False
     i = 0
 
     while not all(read):
-        if i == length:
-            pass  # TODO(complete this)
+        if i == rails:
+            reverse = True
+            i -= 2
+        elif i == -1:
+            reverse = False
+            i += 2
+
+        if indices[i][0] == indices[i][1]:
+            read[i] = True
+        else:
+            result.append(string[indices[i][0]])
+            indices[i][0] += 1
+
+        if reverse:
+            i -= 1
+        else:
+            i += 1
+
+    return ''.join(result)
 
 
 def run_tests():
