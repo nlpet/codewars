@@ -77,7 +77,7 @@ def decode(string, rails):
     indices[-1] = [length - last_line, length]
 
     middles_lines = rails - 2
-    middle_line_len = int((length - first_line - last_line) / (rails - 2))
+    middle_line_len = int((length - first_line - last_line) / middles_lines)
 
     start = first_line
     for line_num in range(1, middles_lines + 1):
@@ -85,11 +85,10 @@ def decode(string, rails):
         start += middle_line_len
 
     result = []
-    read = [False] * rails
     reverse = False
     i = 0
 
-    while not all(read):
+    while len(result) < length:
         if i == rails:
             reverse = True
             i -= 2
@@ -97,9 +96,7 @@ def decode(string, rails):
             reverse = False
             i += 2
 
-        if indices[i][0] == indices[i][1]:
-            read[i] = True
-        else:
+        if indices[i][0] != indices[i][1]:
             result.append(string[indices[i][0]])
             indices[i][0] += 1
 
