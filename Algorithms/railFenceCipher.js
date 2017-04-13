@@ -1,9 +1,18 @@
-const _ = require('lodash');
+//const _ = require('lodash');
 
 // Helper functions
+function clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
+
 function createArrayOfArrays(size, el) {
   const arr = [];
-  for (let i = 0; i < size; i++) { arr.push( _.clone(el) ); }
+  for (let i = 0; i < size; i++) { arr.push( clone(el) ); }
   return arr;
 }
 
@@ -30,14 +39,14 @@ function encodeRailFenceCipher(string, numberRails) {
       i += 2;
     }
 
-    encodedRails[i].push(ch)
+    encodedRails[i].push(ch);
 
     if (reverse) i--;
     else i++;
 
   } );
-
-  return _.flatten(encodedRails).join('');
+  
+  return [].concat(...encodedRails).join('');
 
 }
 
@@ -56,7 +65,7 @@ function decodeRailFenceCipher(string, numberRails) {
   let i = 0;
 
   indices[0] = [0, firstLine];
-  indices[len - 1] = [len - lastLine, len];
+  indices[numberRails - 1] = [len - lastLine, len];
 
   for (let lineNum = 1; lineNum <= middleLines; lineNum++) {
     indices[lineNum] = [start, start + middleLineLen];
@@ -97,9 +106,9 @@ function test() {
   msg = `Expected ${result} to equal WEAREDISCOVEREDFLEEATONCE`;
   assert(result === "WEAREDISCOVEREDFLEEATONCE", msg);
 
-  result = decodeRailFenceCipher("Hello, World!", 3);
+  result = encodeRailFenceCipher("Hello, World!", 3);
   msg = `Expected ${result} to equal Hoo!el,Wrdl l`;
-  assert(result === "Hoo!el,Wrdl l");
+  assert(result === "Hoo!el,Wrdl l", msg);
 
 }
 
