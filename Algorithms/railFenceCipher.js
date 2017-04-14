@@ -45,7 +45,7 @@ function encodeRailFenceCipher(string, numberRails) {
     else i++;
 
   } );
-  
+
   return [].concat(...encodedRails).join('');
 
 }
@@ -109,6 +109,19 @@ function test() {
   result = encodeRailFenceCipher("Hello, World!", 3);
   msg = `Expected ${result} to equal Hoo!el,Wrdl l`;
   assert(result === "Hoo!el,Wrdl l", msg);
+
+  string = `mo nitmaairp erit x ames!t ics ipidieimoao tv urtciiusstibsxeiinurtstreruinreaact
+  eep end, e  g eeteuoitienaesias!miDidu  unttqcrenomsseicrqe.asdf a e e iera uP afo!aro iu,m l
+  vdrt aepAupoenviVmu mril s eiuleotkej    eiouiniros pastt  n  af f`;
+  result = encodeRailFenceCipher(string, 44);
+
+  string = `encode dav  iturste  oouim s,   epioose  auspAteiifettrir!idtri ird e px aosmr
+  fartsa eti  sen  voei iuc uvraitisuqd u miqsp ct mtee aumetu urlpP!etVmsr ia ei tiosimiu
+  nsirelpakixge m.fn otaectia no!rnaief,bmoc jsercnueia onteire  in uaeelDienee sadan 44
+  decode dngae xevs i   vkm  oa.iiepfttilnue e r irosauittscsaet ne ru c avutofriio amanurii
+  aimtsndmsiooa osi!ssautr , q ne xdiae p ein  u eeee afip mi,Didi blorqrmeoissoes pmcaei
+  V u rctj  ttesnad !eiuimPr s!tpc prelneAierurtr ueieta ieituuatiemt nfeo`;
+  result = encodeRailFenceCipher(string, 44);
 
 }
 
