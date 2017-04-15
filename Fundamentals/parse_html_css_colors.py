@@ -1,7 +1,6 @@
 """
 Parse HTML/CSS Colors
 
-
 Output
 In this kata you parse RGB colors represented by strings. The formats are
 primarily used in HTML and CSS. Your task is to implement a function which
