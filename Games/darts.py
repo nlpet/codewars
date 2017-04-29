@@ -34,15 +34,75 @@ def get_score(x,y):
     Triple ring outer circle: 214 mm
     Double ring inner circle: 324 mm
     Double ring outer circle: 340 mm
+
 """
+from math import sqrt, degrees, atan2
 import sys
 sys.path.append('..')
 
 from helpers.test_wrapper import Test
 
+DISTANCES = {
+    lambda d: d <= 6.35: 'DB',
+    lambda d: d <= 15.9: 'SB',
+    lambda d: 15.9 < d < 99 or 107 < d < 162: '',
+    lambda d: 99 <= d <= 107: 'T',
+    lambda d: 162 <= d <= 170: 'D',
+    lambda d:  170 < d: 'X'
+}
+
+ANGLES = [
+    (lambda a:   9 < a <= 27,  13),
+    (lambda a:  27 < a <= 45,  4),
+    (lambda a:  45 < a <= 63,  18),
+    (lambda a:  63 < a <= 81,  1),
+    (lambda a:  81 < a <= 99,  20),
+    (lambda a:  99 < a <= 117, 5),
+    (lambda a: 117 < a <= 135, 12),
+    (lambda a: 135 < a <= 153, 9),
+    (lambda a: 153 < a <= 171, 14),
+    (lambda a: 171 < a <= 189, 11),
+    (lambda a: 189 < a <= 207, 8),
+    (lambda a: 207 < a <= 225, 16),
+    (lambda a: 225 < a <= 243, 7),
+    (lambda a: 243 < a <= 261, 19),
+    (lambda a: 261 < a <= 279, 3),
+    (lambda a: 279 < a <= 297, 17),
+    (lambda a: 297 < a <= 315, 2),
+    (lambda a: 315 < a <= 333, 15),
+    (lambda a: 333 < a <= 351, 10),
+    (lambda a:   9 < a <= 351, 6)
+]
+
+
+def get_distance_label(distance):
+    for func, lbl in DISTANCES.items():
+        if func(distance):
+            return lbl
+
+
+def get_angle_label(angle):
+    for func, lbl in ANGLES:
+        if func(angle):
+            return lbl
+
 
 def get_score(x, y):
-    return None  # finish this
+    r = sqrt(x ** 2 + y ** 2)
+    distance = get_distance_label(r)
+    if distance in ['X', 'DB', 'SB']:
+        return distance
+
+    angle = degrees(atan2(y, x))
+
+    # if x < 0 and y > 0:
+    #     angle += 90
+    # elif x < 0 and y < 0:
+    #     angle += 180
+    # elif x > 0 and y < 0:
+    #     angle += 240
+
+    return '{}{}'.format(distance, get_angle_label(angle))
 
 
 def run_tests():

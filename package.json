@@ -13,6 +13,7 @@
   },
   "homepage": "https://github.com/schottkey7/codewars#readme",
   "dependencies": {
+    "git-hooks": "^1.1.8",
     "lodash": "^4.17.4"
   }
 }
