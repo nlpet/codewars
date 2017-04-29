@@ -13,6 +13,7 @@
   },
   "homepage": "https://github.com/schottkey7/codewars#readme",
   "dependencies": {
+    "conventional-changelog-lint": "^1.1.9",
     "git-hooks": "^1.1.8",
     "lodash": "^4.17.4"
   }
