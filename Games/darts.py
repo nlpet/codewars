@@ -42,14 +42,14 @@ sys.path.append('..')
 
 from helpers.test_wrapper import Test
 
-DISTANCES = {
-    lambda d: d <= 6.35: 'DB',
-    lambda d: d <= 15.9: 'SB',
-    lambda d: 15.9 < d < 99 or 107 < d < 162: '',
-    lambda d: 99 <= d <= 107: 'T',
-    lambda d: 162 <= d <= 170: 'D',
-    lambda d:  170 < d: 'X'
-}
+DISTANCES = [
+    (lambda d: d <= 6.35, 'DB'),
+    (lambda d: d <= 15.9, 'SB'),
+    (lambda d: 15.9 < d < 99 or 107 < d < 162, ''),
+    (lambda d: 99 <= d <= 107, 'T'),
+    (lambda d: 162 <= d <= 170, 'D'),
+    (lambda d:  170 < d, 'X')
+]
 
 ANGLES = [
     (lambda a:   9 < a <= 27,  13),
@@ -71,12 +71,12 @@ ANGLES = [
     (lambda a: 297 < a <= 315, 2),
     (lambda a: 315 < a <= 333, 15),
     (lambda a: 333 < a <= 351, 10),
-    (lambda a:   9 < a <= 351, 6)
+    (lambda a:   a < 9 or 351 < a <= 360, 6)
 ]
 
 
 def get_distance_label(distance):
-    for func, lbl in DISTANCES.items():
+    for func, lbl in DISTANCES:
         if func(distance):
             return lbl
 
@@ -95,12 +95,8 @@ def get_score(x, y):
 
     angle = degrees(atan2(y, x))
 
-    # if x < 0 and y > 0:
-    #     angle += 90
-    # elif x < 0 and y < 0:
-    #     angle += 180
-    # elif x > 0 and y < 0:
-    #     angle += 240
+    if angle < 0:
+        angle += 360
 
     return '{}{}'.format(distance, get_angle_label(angle))
 
@@ -122,6 +118,10 @@ def run_tests():
                            "The score can be a tripple")
         test.assert_equals(get_score(-145.19, 86.53), "D9",
                            "The score can be a double")
+        test.assert_equals(get_score(161, 0.71), "6",
+                           "The score can be 6")
+        test.assert_equals(get_score(-105, 19), "T14",
+                           "The score can be T14")
 
 
 if __name__ == '__main__':
