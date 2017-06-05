@@ -52,47 +52,37 @@ each code must be uppercase). E.g.
 
 S600 C560
 """
+import re
 import sys
 sys.path.append('..')
 
 from helpers.test_wrapper import Test
 
-MAPPER = {
-    'b': 1, 'f': 1, 'p': 1, 'v': 1,
-    'c': 2, 'g': 2, 'j': 2, 'k': 2,
-    'q': 2, 's': 2, 'x': 2, 'z': 2,
-    'd': 3, 't': 3, 'l': 4, 'm': 5,
-    'n': 5, 'r': 6
-}
-
 
 def soundex(s):
-    ls = s.split(' ')
     result = []
 
-    for s in ls:
-        first, new = s[0], []
-        s = s[0] + s[1:].lower().replace('h', '').replace('w', '')
-        for ch in s:
-            num = MAPPER.get(ch)
-            if num and ((new and new[-1] != num) or not new):
-                new.append(num)
-        if new[0] in range(0, 9):
-            new[0] = first
-        if len(new) < 4:
-            new.extend([0] * (4 - len(new)))
-        result.append(''.join([str(x) for x in new]))
+    for s in s.split(' '):
+        first, s = s[0], s.lower()
+        s = s[0] + re.sub('[hw]', '', s[1:])
+        s = s.translate(str.maketrans('bfpvcgjkqsxzdtlmnr', '111122222222334556'))
+        s = re.sub(r'(\d)(\1)+', lambda d: d.group()[0], s)
+        s = s[0] + re.sub('[aeiouy]', '', s[1:])
+        if s[0].isdigit():
+            s = first + s[1:]
+        s = (s + '000')[:4] if len(re.findall('\d', s)) < 3 else s[:4]
+        result.append(s.upper())
     return ' '.join(result)
 
 
 def run_tests():
     with Test() as test:
         test.describe("Arnie")
-        # test.assert_equals(soundex("Sarah Connor"),  "S600 C560")
-        # test.assert_equals(soundex("Sara Conar"),    "S600 C560")
-        # test.assert_equals(soundex("Serah Coner"),   "S600 C560")
-        # test.assert_equals(soundex("Sarh Connor"),   "S600 C560")
-        # test.assert_equals(soundex("Sayra Cunnarr"), "S600 C560")
+        test.assert_equals(soundex("Sarah Connor"),  "S600 C560")
+        test.assert_equals(soundex("Sara Conar"),    "S600 C560")
+        test.assert_equals(soundex("Serah Coner"),   "S600 C560")
+        test.assert_equals(soundex("Sarh Connor"),   "S600 C560")
+        test.assert_equals(soundex("Sayra Cunnarr"), "S600 C560")
         test.assert_equals(soundex("Bob"), "B100")
 
 
