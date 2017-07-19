@@ -35,7 +35,8 @@ class Test(object):
 
     def _format_msg(self, a, b, msg):
         if not msg:
-            # a, b = map(lambda x: list(x) if isinstance(x, Iterable) else x, [a, b])
+            # a, b = map(lambda x: list(x)
+            # if isinstance(x, Iterable) else x, [a, b])
             msg = 'expect {} to equal {}'.format(a, b)
         return msg
 
@@ -47,12 +48,10 @@ class Test(object):
             self._handle_failure(msg)
 
     def assert_equals(self, a, b, msg=None):
-        eq = lambda a, b: a == b
-        self._assert(eq, a, b, msg)
+        self._assert(lambda a, b: a == b, a, b, msg)
 
     def assert_not_equals(self, a, b, msg=None):
-        neq = lambda a, b: a != b
-        self._assert(neq, a, b, msg)
+        self._assert(lambda a, b: a != b, a, b, msg)
 
     def expect(self, expected, msg=None):
         if not msg:

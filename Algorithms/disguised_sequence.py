@@ -1,14 +1,14 @@
 """A disguised sequence (I)"""
 
+from helpers.test_wrapper import Test
+
 import sys
 sys.path.append('..')
-
-from helpers.test_wrapper import Test
 
 
 def fcn(n):
     f, s = 1, 2
-    for i in range(2, n + 1):
+    for _ in range(2, n + 1):
         nxt = (6 * f * s) // (5 * f - s)
         f, s = s, nxt
     return nxt
