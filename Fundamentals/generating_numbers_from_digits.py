@@ -44,14 +44,13 @@ Higher performance tests:
 Number of tests: 100
 Arrays of length between 30 and 100
 """
+from helpers.test_wrapper import Test
 from collections import Counter
 from functools import reduce
 from math import factorial
 import operator as op
 import sys
 sys.path.append('..')
-
-from helpers.test_wrapper import Test
 
 
 def ncr(n, r):
@@ -72,7 +71,7 @@ def proc_arr(arr):
     diff = 1
     unique = 0
 
-    for n, c in Counter(arr).most_common():
+    for _, c in Counter(arr).most_common():
         if c == 1:
             unique += 1
         else:

@@ -11,7 +11,6 @@ a = "abcdefghijklmnopqrstuvwxyz"
 longest(a, a) -> "abcdefghijklmnopqrstuvwxyz"
 """
 import string
-import time
 
 
 def longest(s1, s2):
@@ -39,5 +38,7 @@ def longest2(a1, a2):
 
 if __name__ == '__main__':
     assert(longest("aretheyhere", "yestheyarehere") == "aehrsty")
-    assert(longest("loopingisfunbutdangerous", "lessdangerousthancoding") == "abcdefghilnoprstu")
-    assert(longest("inmanylanguages", "theresapairoffunctions") == "acefghilmnoprstuy")
+    assert(longest("loopingisfunbutdangerous",
+                   "lessdangerousthancoding") == "abcdefghilnoprstu")
+    assert(longest("inmanylanguages", "theresapairoffunctions")
+           == "acefghilmnoprstuy")
