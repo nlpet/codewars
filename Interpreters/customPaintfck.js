@@ -102,7 +102,7 @@ A few things to note:
 */
 
 function flipBit(bit) {
-  return bit == '0' ? '1' : '0'
+  return bit === '0' ? '1' : '0'
 }
 
 
@@ -129,7 +129,7 @@ function zeroes(dimensions) {
     var array = [];
 
     for (var i = 0; i < dimensions[0]; ++i) {
-        array.push(dimensions.length == 1 ? 0 : zeroes(dimensions.slice(1)));
+        array.push(dimensions.length === 1 ? 0 : zeroes(dimensions.slice(1)));
     }
     return array;
 }
