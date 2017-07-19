@@ -241,7 +241,7 @@ function test() {
   let msg;
 
   msg = "Your interpreter should initialize all cells in the datagrid to 0";
-  expected = displayExpected("000000\r\n000000\r\n000000\r\n000000\r\n000000\r\n000000\r\n000000\r\n000000\r\n000000")
+  expected = displayExpected("000000\r\n000000\r\n000000\r\n000000\r\n000000\r\n000000\r\n000000\r\n000000\r\n000000");
   assert(interpreter("*e*e*e*es*es*ws*ws*w*w*w*n*n*n*ssss*s*s*s*", 0, 6, 9) === expected, msg);
 
   msg = "Your interpreter should adhere to the number of iterations specified";
