@@ -73,7 +73,7 @@
 */
 
 function flipBit(bit) {
-  return bit === '0' ? '1' : '0'
+  return bit === '0' ? '1' : '0';
 }
 
 
@@ -151,7 +151,7 @@ function test() {
   assert(interpreter(">>>>>*<*<<*", "00101100") === "00000000", msg);
 
   msg = 'Failed to stop when pointer moved too far to the right';
-  assert(interpreter(">>*>>", "01") === "01", msg)
+  assert(interpreter(">>*>>", "01") === "01", msg);
 }
 
 

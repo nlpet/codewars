@@ -102,7 +102,7 @@ A few things to note:
 */
 
 function flipBit(bit) {
-  return bit === '0' ? '1' : '0'
+  return bit === '0' ? '1' : '0';
 }
 
 
